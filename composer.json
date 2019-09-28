@@ -1,0 +1,35 @@
+{
+  "name": "kkszymanowski/laravel-6-odbc",
+  "description": "ODBC Connector for Laravel 6",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kuba Szymanowski",
+      "email": "kubaszymanowski@gmail.com"
+    },
+    {
+      "name": "tck",
+      "email": "ben@thecreativekind.co.uk"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "illuminate/support": "^6.0",
+    "illuminate/container": "^6.0",
+    "illuminate/database": "^6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Odbc\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Odbc\\OdbcServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
