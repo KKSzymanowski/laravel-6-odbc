@@ -47,7 +47,7 @@ class OdbcConnection extends Connection
     {
         /** @var Repository $config */
         $config = Container::getInstance()->make(Repository::class);
-        $class = $config->get('database.connections.odbc.processor');
+        $class = $config->get('database.connections.odbc.processor') ?: OdbcProcessor::class;
 
         return new $class;
     }
