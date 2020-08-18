@@ -37,4 +37,18 @@ class OdbcConnection extends Connection
 
         return $this->withTablePrefix(new $class);
     }
+
+    /**
+     * Get the default post processor instance.
+     *
+     * @return Processor
+     */
+    protected function getDefaultPostProcessor()
+    {
+        /** @var Repository $config */
+        $config = Container::getInstance()->make(Repository::class);
+        $class = $config->get('database.connections.odbc.processor');
+
+        return new $class;
+    }
 }
