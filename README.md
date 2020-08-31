@@ -30,13 +30,15 @@ DB_ODBC_USERNAME=User
 DB_ODBC_PASSWORD=Password
 ```
 
-If you would like to customize the Schema and Query grammars used in the ODBC connection you can do that by extending `\Odbc\OdbcSchemaGrammar` and `\Odbc\OdbcQueryGrammar`.
+If you would like to customize the schema grammar, query grammar or the post processor used in the ODBC connection you can do that by extending `\Odbc\OdbcSchemaGrammar`, `\Odbc\OdbcQueryGrammar` and `\Odbc\OdbcProcessor` respectively.
 Then add the following configuration entries:
 ```
 'database.connections.odbc.grammar.query'
 'database.connections.odbc.grammar.schema'
+'database.connections.odbc.processor'
 ```
-For example:
+
+For example in `config/database.php` add:
 ```php
 'connections' => [
     // ...
@@ -46,9 +48,11 @@ For example:
             'query' => \App\Grammars\CustomQueryGrammar::class,
             'schema' => \App\Grammars\CustomSchemaGrammar::class,
         ],
+        'processor' => \App\Processors\CustomProcessor::class,
     ],
 
     // ...
+],
 ```
 One of the more common cases would be to customize the `compileLimit()` method used in pagination and in the `skip()` method.
 You can do this in the following way
@@ -72,6 +76,14 @@ class CustomQueryGrammar extends OdbcQueryGrammar
     }
 }
 ```
+
+Note that the custom processor is **not** used when running raw queries, for example `$connection->select('SELECT * FROM USERS')`. 
+To use it you must build the queries with the Eloquent query builder, for example:
+```php
+User::get();
+DB::connection('myOdbcConnection')->table('USERS')->get(); 
+```
+
 ### Usage
 #### With Eloquent
 To override your default database connection define `$connection` name in your Eloquent Model
@@ -93,6 +105,6 @@ $users = User::all();
 You can also perform queries without Eloquent models. Make sure you specify the connection name if it isn't your default one, for example:
 ```php
 $user = DB::connection('myOdbcConnection')->select('SELECT * FROM USERS WHERE id = :id', ['id' => 1]);
-$users = DB::connection('myOdbcConnection')->table('USERS')->select('*')->get();
+$users = DB::connection('myOdbcConnection')->table('USERS')->where('id', 1)->get();
 ```
 If you're running raw queries make sure to use parameter bindings wherever possible to avoid SQL Injection vulnerabilities.
