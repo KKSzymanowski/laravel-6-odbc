@@ -1,6 +1,6 @@
 ## ODBC driver for Laravel 6 and 7
 
-Package inspired by [tck/odbc](https://github.com/bencarter78/odbc) but simplified, modernized and made compatible with Laravel 6 and 7.
+Package inspired by [tck/odbc](https://github.com/bencarter78/odbc) but simplified, modernized and made compatible with Laravel 6, 7 and 8.
 
 ### Installation
 ```
