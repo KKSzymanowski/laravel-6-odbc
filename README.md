@@ -1,4 +1,4 @@
-## ODBC driver for Laravel 6 and 7
+## ODBC driver for Laravel 6, 7 and 8
 
 Package inspired by [tck/odbc](https://github.com/bencarter78/odbc) but simplified, modernized and made compatible with Laravel 6, 7 and 8.
 
@@ -30,7 +30,7 @@ DB_ODBC_USERNAME=User
 DB_ODBC_PASSWORD=Password
 ```
 
-If you would like to customize the schema grammar, query grammar or the post processor used in the ODBC connection you can do that by extending `\Odbc\OdbcSchemaGrammar`, `\Odbc\OdbcQueryGrammar` and `\Odbc\OdbcProcessor` respectively.
+If you would like to customize the schema grammar, query grammar, or the post processor used in the ODBC connection you can do that by extending `\Odbc\OdbcSchemaGrammar`, `\Odbc\OdbcQueryGrammar` and `\Odbc\OdbcProcessor` respectively.
 Then add the following configuration entries:
 ```
 'database.connections.odbc.grammar.query'
@@ -55,7 +55,7 @@ For example in `config/database.php` add:
 ],
 ```
 One of the more common cases would be to customize the `compileLimit()` method used in pagination and in the `skip()` method.
-You can do this in the following way
+You can do this in the following way:
 ```php
 use Illuminate\Database\Query\Builder;
 use Odbc\OdbcQueryGrammar;

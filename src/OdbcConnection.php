@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Grammar;
+use Illuminate\Database\Query\Processors\Processor;
 
 class OdbcConnection extends Connection
 {
